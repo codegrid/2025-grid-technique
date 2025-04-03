@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja" prefix="og: http://ogp.me/ns#">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="format-detection" content="email=no,telephone=no,address=no" />
+<title>=^.^=</title>
+<style>
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+  background: #fc8;
+  width: 300px;
+}
+
+.inputWrapper {
+  display: grid;
+  grid-template-columns: 0px min-content;
+}
+
+.inputWrapper::after {
+  content: attr(data-value) "";
+  visibility: hidden;
+  white-space: pre;
+  grid-area: 1 / 2;
+  min-width: 1em;
+}
+
+input {
+  width: 100%;
+  grid-area: 1 / 2;
+  padding: 0;
+  border: 1px solid #ccc;
+  font: inherit;
+}
+</style>
+<script type="module">
+const inputWrapperEl = document.querySelector( '.inputWrapper' );
+const inputEl = inputWrapperEl.querySelector( 'input' );
+
+// [1 of 4] input 要素に入力したとき、inputWrapperEl の data 属性にその値をコピーする
+inputEl.addEventListener( 'input', () => {
+
+	inputWrapperEl.setAttribute( 'data-value', inputEl.value );
+
+} );
+
+</script>
+</head>
+<body>
+
+<div class="container">
+  <span>入力済み値1</span>
+  <span>入力済み値2</span>
+  <div class="inputWrapper" data-value="">
+    <input>
+  </div>
+</div>
+
+</body>
+</html>
