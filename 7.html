@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja" prefix="og: http://ogp.me/ns#">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="format-detection" content="email=no,telephone=no,address=no" />
+<title>=^.^=</title>
+<style>
+::view-transition-new(crossfade) {
+  animation: fade 1s reverse;
+}
+
+::view-transition-old(crossfade) {
+  animation: fade 1s;
+}
+
+@keyframes fade {
+	0% { opacity: 1; }
+	100% { opacity: 0; }
+}
+
+.view {
+  font-weight: 700;
+  font-size: 32px;
+}
+</style>
+<script type="module">
+const buttonEl = document.querySelector( 'button' );
+const viewEl = document.querySelector( '.view' );
+
+const text = [
+	'hello',
+	'world',
+	'長い長い長い長い長い長い長い長い長い長い長い長い長い長い長い長いテキスト 長い長い長い長い長い長い長い長い長い長い長い長い長い長い長い長いテキスト 長い長い長い長い長い長い長い長い長い長い長い長い長い長い長い長いテキスト 長い長い長い長い長い長い長い長い長い長い長い長い長い長い長い長いテキスト',
+];
+let current = 0;
+
+const changeContent = () => {
+
+  current = current + 1 >= text.length ? 0 : current + 1;
+  viewEl.textContent = text[ current ];
+
+};
+
+buttonEl.addEventListener( "click", async () => {
+
+  if ( !( 'startViewTransition' in document ) ) {
+
+    alert( 'ViewTransition is not supported' );
+    return;
+
+  }
+
+  buttonEl.disabled = true;
+  viewEl.style.setProperty( "view-transition-name", "crossfade" );
+  const transition = document.startViewTransition( changeContent );
+
+  await transition.finished;
+  viewEl.style.removeProperty( "view-transition-name" );
+  buttonEl.disabled = false;
+
+} );
+</script>
+</head>
+<body>
+
+<button type="button">
+	View Transition でクロスフェード
+</button>
+
+<div class="view">
+	hello
+</div>
+
+後続の要素
+
+</body>
+</html>

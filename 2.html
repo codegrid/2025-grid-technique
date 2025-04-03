@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja" prefix="og: http://ogp.me/ns#">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="format-detection" content="email=no,telephone=no,address=no" />
+<title>=^.^=</title>
+<style>
+.container {
+  position: relative;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 2px 8px;
+  overflow: hidden;
+  max-width: 300px;
+  background: pink;
+}
+
+.container:focus-within {
+  outline: 2px solid blue;
+}
+
+.tag {
+  background: #ccc;
+  border-radius: 4px;
+  padding: 2px;
+}
+
+/* inputWrapper は [3 of 4] data属性の値の文字列の大きさにフィットする。これにより、「入力した文字列の大きさ」が自動で確保される */
+.inputWrapper {
+  display: grid;
+  grid-template-columns: 0px min-content;
+  max-width: 100%;
+  overflow: hidden;
+  border: 1px solid red;
+}
+
+/* [2 of 4] data 属性の値を、表示に適用する */
+.inputWrapper::after {
+  content: attr(data-value) "";
+  visibility: hidden;
+  white-space: pre;
+  grid-area: 1 / 2;
+  font: inherit;
+  min-width: 2px;
+}
+
+/* [4 of 4] input 要素 は、grid-area により inputWrapper と同じ大きさで重なる */
+input {
+  width: 100%;
+  grid-area: 1 / 2;
+  min-width: 1em;
+  padding: 0;
+  border: 1px solid #ccc;
+  font: inherit;
+  outline: none;
+}
+
+</style>
+<script type="module">
+
+const containerEl = document.querySelector( '.container' );
+const inputWrapperEl = containerEl.querySelector( '.inputWrapper' );
+const inputEl = containerEl.querySelector( 'input' );
+
+// ピンク背景内部をクリックしたとき、input要素にフォーカスを当てる
+containerEl.addEventListener( 'click', ( event ) => {
+
+	// ただし、「タグ」部分をクリックしていたら、何もしない
+	if ( event.target.closest( '.tag' ) ) return;
+	inputEl.focus();
+
+} );
+
+// [1 of 4] input 要素に入力したとき、inputWrapperEl の data 属性にその値をコピーする
+inputEl.addEventListener( 'input', () => {
+
+	inputWrapperEl.setAttribute( 'data-value', inputEl.value );
+
+} );
+
+</script>
+</head>
+<body>
+
+ピンク背景部分をクリックでフォーカス。値を入力すると、入力領域が変動。収まらない場合は次の行に回り込む。
+
+<div class="container">
+  <div class="tag">tag1</div>
+  <div class="tag">long long tag2</div>
+  <div class="tag">tag3</div>
+  <div class="inputWrapper" data-value="">
+    <input>
+  </div>
+</div>
+
+</body>
+</html>

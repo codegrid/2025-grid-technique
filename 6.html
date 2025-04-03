@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja" prefix="og: http://ogp.me/ns#">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="format-detection" content="email=no,telephone=no,address=no" />
+<title>=^.^=</title>
+<style>
+
+.container {
+	position: relative;
+  font-weight: 700;
+  font-size: 32px;
+}
+
+.from {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.ongoing .from {animation: fade 1s 1 both;}
+.ongoing .to {animation: fade 1s reverse 1 both;}
+.done .from { display: none; }
+
+@keyframes fade {
+	0% { opacity: 1; }
+	100% { opacity: 0; }
+}
+
+</style>
+<script type="module">
+const contents = [
+	'hello',
+	'world',
+	'長い長い長い長い長い長い長い長い長い長い長い長い長い長い長い長いテキスト 長い長い長い長い長い長い長い長い長い長い長い長い長い長い長い長いテキスト 長い長い長い長い長い長い長い長い長い長い長い長い長い長い長い長いテキスト 長い長い長い長い長い長い長い長い長い長い長い長い長い長い長い長いテキスト',
+];
+
+let current = - 1;
+const buttonEl = document.querySelector( 'button' );
+const containerEl = document.querySelector( '.container' );
+const fromEl = document.querySelector( '.from' );
+const toEl = document.querySelector( '.to' );
+
+// ボタンを押したときに実行される関数
+// `contents` 配列から次のコンテンツを取得し、`fromEl` と `toEl` にそれぞれセットする。
+// その後、class 属性を付け替えて CSS アニメーションを実行させる。
+const crossFade = () => {
+
+	buttonEl.disabled = true;
+
+	current = ( current + 1 ) % contents.length;
+	const next = ( current + 1 ) % contents.length;
+	fromEl.textContent = contents[ current ];
+	toEl.textContent = contents[ next ];
+	containerEl.classList.add( 'ongoing' );
+	containerEl.classList.remove( 'done' );
+
+	setTimeout( () => {
+
+		containerEl.classList.remove( 'ongoing' );
+		containerEl.classList.add( 'done' );
+		buttonEl.disabled = false;
+
+	}, 1000 );
+
+};
+
+crossFade();
+buttonEl.addEventListener( 'click', crossFade );
+</script>
+</head>
+<body>
+
+<button type="button">クロスフェード</button>
+
+<div class="container">
+	<div class="from"></div>
+	<div class="to"></div>
+</div>
+
+後続のコンテンツ
+
+</body>
+</html>
