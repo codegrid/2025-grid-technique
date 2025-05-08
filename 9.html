@@ -9,20 +9,20 @@
 
 .inputWrapper {
   display: grid;
-  grid-template-columns: 0px min-content;
+  grid-template-columns: min-content;
 }
 
 .inputWrapper::after {
   content: attr(data-value) "";
   visibility: hidden;
   white-space: pre;
-  grid-area: 1 / 2;
+  grid-area: 0 / 1;
   min-width: 1em;
 }
 
-input {
+.inputWrapper input {
   width: 100%;
-  grid-area: 1 / 2;
+  grid-area: 0 / 1;
   padding: 0;
   border: 1px solid #ccc;
   font: inherit;
