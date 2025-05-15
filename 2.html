@@ -32,7 +32,7 @@
 /* inputWrapper は [3 of 4] data属性の値の文字列の大きさにフィットする。これにより、「入力した文字列の大きさ」が自動で確保される */
 .inputWrapper {
   display: grid;
-  grid-template-columns: 0px min-content;
+  grid-template-columns: min-content auto;
   max-width: 100%;
   overflow: hidden;
   border: 1px solid red;
@@ -43,7 +43,7 @@
   content: attr(data-value) "";
   visibility: hidden;
   white-space: pre;
-  grid-area: 1 / 2;
+  grid-area: 1 / 1 / 2 / 2;
   font: inherit;
   min-width: 2px;
 }
@@ -51,7 +51,7 @@
 /* [4 of 4] input 要素 は、grid-area により inputWrapper と同じ大きさで重なる */
 input {
   width: 100%;
-  grid-area: 1 / 2;
+  grid-area: 1 / 1 / 2 / 2;
   min-width: 1em;
   padding: 0;
   border: 1px solid #ccc;

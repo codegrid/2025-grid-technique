@@ -18,7 +18,7 @@
 
 .inputWrapper {
   display: grid;
-  grid-template-columns: 0px min-content;
+  grid-template-columns: min-content auto;
   max-width: 100%;
   overflow: hidden;
 }
@@ -27,13 +27,13 @@
   content: attr(data-value) "";
   visibility: hidden;
   white-space: pre;
-  grid-area: 1 / 2;
+  grid-area: 1 / 1 / 2 / 2;
   min-width: 1em;
 }
 
 input {
   width: 100%;
-  grid-area: 1 / 2;
+  grid-area: 1 / 1 / 2 / 2;
   padding: 0;
   border: 1px solid #ccc;
   font: inherit;
